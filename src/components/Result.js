@@ -3,7 +3,8 @@ import React from 'react';
 const Result = (props) => {
     return (
         <>
-        <h1>Your maximum Houe Value is: £{props.results}</h1>
+        <h2>Maximum House Value: £{props.results}</h2>
+        <h2>Expected Monthly Repayments: £{props.repaymentResults}</h2> 
         </>
     )
 }

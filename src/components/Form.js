@@ -9,6 +9,8 @@ class Form extends Component {
             salary2: 0,
             deposit: 0,
             commitments: 0,
+            term: 0,
+            interest: 0.00,
             showing: false
         }
         
@@ -28,7 +30,9 @@ class Form extends Component {
         const salary2 = parseInt(this.state.salary2);
         const deposit = parseInt(this.state.deposit);
         const commitments = parseInt(this.state.commitments);
-        if (!salary || !deposit || !commitments) {
+        const interest = parseFloat(this.state.interest);
+        const term = parseInt(this.state.term);
+        if (!salary || !deposit || !commitments || !term) {
             return;
         }
 
@@ -36,7 +40,9 @@ class Form extends Component {
             salary,
             salary2,
             deposit,
-            commitments
+            commitments,
+            term,
+            interest
         })
 
         this.setState({
@@ -44,6 +50,8 @@ class Form extends Component {
             salary2: 0,
             deposit: 0,
             commitments: 0,
+            term: 0,
+            interest: 0.00
         });
     }
     
@@ -52,7 +60,7 @@ class Form extends Component {
 
         return (
           <form onSubmit={this.handleSubmit}>
-              <label name="salary">Your salary</label>
+              <label name="salary">Your annual salary</label>
               <input 
                   type="number"
                   placeholder="Your salary"
@@ -95,7 +103,24 @@ class Form extends Component {
                   value={this.state.commitments}
                   onChange={this.handleChange}
               />
-              <input type="submit" value="Calculate"/>
+              <label>Mortgage term in years</label>
+              <input 
+                  type="number"
+                  placeholder="Your mortgage term in years"
+                  name="term"
+                  value={this.state.term}
+                  onChange={this.handleChange}
+              />
+              <label>Monthly interest rate %</label>
+              <input 
+                  type="number"
+                  placeholder="Your interest rate"
+                  name="interest"
+                  value={this.state.interest}
+                  onChange={this.handleChange}
+              />
+              
+              <input className="calculate" type="submit" value="Calculate"/>
           </form>
         );
     }
