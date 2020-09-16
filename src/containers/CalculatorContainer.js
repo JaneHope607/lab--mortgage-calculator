@@ -7,18 +7,15 @@ class CalculatorContainer extends Component {
         super();
 
         this.state = {
-            salary: 0,
             results: 0,
         };
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
-    handleFormSubmit(salary) {
-        salary.id = Date.now();
-        const updatedSalary = salary.salary
-        const maxHouseValue = updatedSalary * 3;
+    handleFormSubmit(formData) {
+        const updatedSalary = formData.salary
+        const maxHouseValue = (updatedSalary * 3) + formData.deposit;
         this.setState({
-            salary: updatedSalary,
             results: maxHouseValue  
         });
     }

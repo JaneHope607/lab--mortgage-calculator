@@ -5,7 +5,8 @@ class Form extends Component {
     constructor() {
         super();
         this.state = {
-            salary: 0
+            salary: 0,
+            deposit: 0
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -20,17 +21,20 @@ class Form extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const salary = this.state.salary.trim();
-        if (!salary) {
+        const salary = parseInt(this.state.salary);
+        const deposit = parseInt(this.state.deposit);
+        if (!salary || !deposit) {
             return;
         }
 
         this.props.onFormSubmit({
-            salary
+            salary,
+            deposit
         })
 
         this.setState({
             salary: 0,
+            deposit: 0
         });
     }
     
@@ -42,6 +46,13 @@ class Form extends Component {
                   placeholder="Your salary"
                   name="salary"
                   value={this.state.salary}
+                  onChange={this.handleChange}
+              />
+              <input 
+                  type="number"
+                  placeholder="Your deposit"
+                  name="deposit"
+                  value={this.state.deposit}
                   onChange={this.handleChange}
               />
               <input type="submit" value="Post"/>
