@@ -8,7 +8,8 @@ class Form extends Component {
             salary: 0,
             salary2: 0,
             deposit: 0,
-            commitments: 0
+            commitments: 0,
+            showing: false
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -42,11 +43,13 @@ class Form extends Component {
             salary: 0,
             salary2: 0,
             deposit: 0,
-            commitments: 0
+            commitments: 0,
         });
     }
     
     render() {
+        const { showing } = this.state;
+
         return (
           <form onSubmit={this.handleSubmit}>
               <label name="salary">Your salary</label>
@@ -57,14 +60,25 @@ class Form extends Component {
                   value={this.state.salary}
                   onChange={this.handleChange}
               />
-              <label name="salary2">Other salary</label>
-              <input 
-                  type="number"
-                  placeholder="Your other salary"
-                  name="salary2"
-                  value={this.state.salary2}
-                  onChange={this.handleChange}
-              />
+
+
+            <div>
+                <button onClick={() => this.setState({ showing: !showing })}>Add another salary</button>
+                { showing 
+                    ? <div>
+                        <label name="salary2">Other salary</label>
+                        <input 
+                            type="number"
+                            placeholder="Your other salary"
+                            name="salary2"
+                            value={this.state.salary2}
+                            onChange={this.handleChange}
+                        />   
+                      </div>
+                    : null
+                }
+            </div>  
+
               <label>Your deposit</label>
               <input 
                   type="number"
@@ -81,7 +95,7 @@ class Form extends Component {
                   value={this.state.commitments}
                   onChange={this.handleChange}
               />
-              <input type="submit" value="Post"/>
+              <input type="submit" value="Calculate"/>
           </form>
         );
     }
